@@ -1,8 +1,9 @@
 const path = require('path');
-const merge = require('lodash/merge');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const commonConfig = {
   /**
@@ -74,10 +75,12 @@ const developmentConfig = {
       poll: 1000,
       ignored: [path.join(__dirname, 'node_modules')]
     }
-  }
+  },
+  plugins: [new CaseSensitivePathsPlugin()]
 };
 
 module.exports = (_, { mode }) => {
+  console.log(merge(commonConfig, developmentConfig));
   if (mode === 'development') {
     return merge(commonConfig, developmentConfig);
   }
