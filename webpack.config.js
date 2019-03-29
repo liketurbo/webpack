@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const commonConfig = {
   /**
@@ -13,7 +14,8 @@ const commonConfig = {
   node: {
     fs: 'empty',
     module: 'empty',
-    child_process: 'empty'
+    child_process: 'empty',
+    readline: 'empty'
   },
   /**
    * Stop on the first error
@@ -76,11 +78,10 @@ const developmentConfig = {
       ignored: [path.join(__dirname, 'node_modules')]
     }
   },
-  plugins: [new CaseSensitivePathsPlugin()]
+  plugins: [new CaseSensitivePathsPlugin(), new FriendlyErrorsWebpackPlugin()]
 };
 
 module.exports = (_, { mode }) => {
-  console.log(merge(commonConfig, developmentConfig));
   if (mode === 'development') {
     return merge(commonConfig, developmentConfig);
   }
