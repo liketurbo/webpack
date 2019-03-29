@@ -4,11 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-const PATHS = {
-  app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'dist')
-};
-
 const commonConfig = {
   /**
    * Fixed bug: cannot resolve fs module
@@ -29,10 +24,10 @@ const commonConfig = {
    * it resolves to that.
    */
   entry: {
-    app: PATHS.app
+    app: path.join(__dirname, 'src')
   },
   output: {
-    path: PATHS.build,
+    path: path.join(__dirname, 'dist'),
     filename: '[name].js'
   },
   plugins: [
@@ -71,7 +66,14 @@ const developmentConfig = {
      * unlike default `localhost`.
      */
     host: process.env.HOST, // Defaults to `localhost`
-    port: process.env.PORT // Defaults to 8080
+    port: process.env.PORT, // Defaults to 8080
+    watchOptions: {
+      // Delay the rebuild after the first change
+      aggregateTimeout: 300,
+      // Poll using interval (in ms, accepts boolean too)
+      poll: 1000,
+      ignored: [path.join(__dirname, 'node_modules')]
+    }
   }
 };
 
