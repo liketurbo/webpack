@@ -49,6 +49,18 @@ const commonConfig = {
 const productionConfig = commonConfig;
 
 const developmentConfig = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: true
+        }
+      }
+    ]
+  },
   devServer: {
     /**
      * Enable history API fallback so HTML5 History API based
@@ -71,9 +83,13 @@ const developmentConfig = {
     host: process.env.HOST, // Defaults to `localhost`
     port: process.env.PORT, // Defaults to 8080
     watchOptions: {
-      // Delay the rebuild after the first change
+      /**
+       * Delay the rebuild after the first change
+       */
       aggregateTimeout: 300,
-      // Poll using interval (in ms, accepts boolean too)
+      /**
+       * Poll using interval (in ms, accepts boolean too)
+       */
       poll: 1000,
       ignored: [path.join(__dirname, 'node_modules')]
     }
