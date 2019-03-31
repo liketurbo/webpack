@@ -1,9 +1,13 @@
 const path = require('path');
+const merge = require('webpack-merge');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-const commonConfig = {
+const parts = require('./webpack.parts');
+
+const commonConfig = merge(parts.css, {
   /**
    * Entries have to resolve to files! They rely on Node
    * convention by default so if a directory contains *index.js*,
@@ -27,6 +31,6 @@ const commonConfig = {
       path.join(__dirname, '../src/assets/img/icon-4017417_640.png')
     )
   ]
-};
+});
 
 module.exports = commonConfig;
