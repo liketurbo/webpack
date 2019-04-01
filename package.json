@@ -6,7 +6,7 @@
   "author": "Ramzan Chasygov <theliketurbo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec 'yarn dev' webpack.config.js",
+    "start": "nodemon --exec yarn dev",
     "dev": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
     "lint.js": "eslint src/ webpack.config.js"
