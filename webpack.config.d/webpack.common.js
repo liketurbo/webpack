@@ -7,7 +7,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const parts = require('./webpack.parts');
 
-const commonConfig = merge(parts.css, {
+const commonConfig = merge(parts.styles, {
   /**
    * Entries have to resolve to files! They rely on Node
    * convention by default so if a directory contains *index.js*,
@@ -28,7 +28,7 @@ const commonConfig = merge(parts.css, {
       defaultAttribute: 'async'
     }),
     new FaviconsWebpackPlugin(
-      path.join(__dirname, '../src/assets/img/icon-4017417_640.png')
+      path.join(__dirname, '../src/assets/imgs/icon-4017417_640.png')
     )
   ]
 });
