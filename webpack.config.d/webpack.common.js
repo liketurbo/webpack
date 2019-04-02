@@ -9,6 +9,10 @@ const parts = require('./webpack.parts');
 
 const commonConfig = merge(parts.styles, {
   /**
+   * Stop on the first error
+   */
+  bail: true,
+  /**
    * Entries have to resolve to files! They rely on Node
    * convention by default so if a directory contains *index.js*,
    * it resolves to that.

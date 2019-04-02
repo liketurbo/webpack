@@ -1,5 +1,3 @@
-const commonConfig = require('./webpack.common');
-
-const productionConfig = commonConfig;
+const productionConfig = {};
 
 module.exports = productionConfig;

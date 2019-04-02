@@ -2,10 +2,6 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 const developmentConfig = {
-  /**
-   * Stop on the first error
-   */
-  bail: true,
   module: {
     rules: [
       {
