@@ -12,7 +12,7 @@ exports.styles = env => {
            */
           use: [
             env === DEV_ENV ? 'style-loader' : MiniCssExtractPlugin.loader,
-            { loader: 'css-loader', options: { modules: true } },
+            'css-loader',
             'postcss-loader'
           ]
         },
