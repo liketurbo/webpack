@@ -1,13 +1,10 @@
 const path = require('path');
-const merge = require('webpack-merge');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-const parts = require('./webpack.parts');
-
-const commonConfig = merge(parts.styles, {
+const commonConfig = {
   /**
    * Stop on the first error
    */
@@ -35,6 +32,6 @@ const commonConfig = merge(parts.styles, {
       path.join(__dirname, '../src/assets/imgs/icon-4017417_640.png')
     )
   ]
-});
+};
 
 module.exports = commonConfig;
