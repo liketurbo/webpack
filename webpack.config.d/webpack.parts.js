@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const autoprefixer = require('autoprefixer');
 const { DEV_ENV } = require('./webpack.constants');
 
 exports.styles = env => {
@@ -12,8 +13,26 @@ exports.styles = env => {
            */
           use: [
             env === DEV_ENV ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader'
+            {
+              loader: 'css-loader'
+            },
+            env === DEV_ENV
+              ? {
+                  loader: 'postcss-loader',
+                  options: {
+                    plugins: []
+                  }
+                }
+              : {
+                  loader: 'postcss-loader',
+                  options: {
+                    plugins: [
+                      autoprefixer({
+                        browsers: ['last 2 version']
+                      })
+                    ]
+                  }
+                }
           ]
         },
         {
