@@ -1,5 +1,12 @@
-.css {
+.used {
+  display: flex;
   color: blue;
   background-color: powderblue;
   font-family: courier;
+}
+
+.unused {
+  color: red;
+  background-color: azure;
+  font-family: fantasy;
 }

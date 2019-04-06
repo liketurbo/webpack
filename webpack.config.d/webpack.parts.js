@@ -1,9 +1,12 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob');
+const path = require('path');
 const autoprefixer = require('autoprefixer');
-const { DEV_ENV } = require('./webpack.constants');
+const { DEV_ENV, PROD_ENV } = require('./webpack.constants');
 
 exports.styles = env => {
-  return {
+  const config = {
     module: {
       rules: [
         {
@@ -13,26 +16,7 @@ exports.styles = env => {
            */
           use: [
             env === DEV_ENV ? 'style-loader' : MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader'
-            },
-            env === DEV_ENV
-              ? {
-                  loader: 'postcss-loader',
-                  options: {
-                    plugins: []
-                  }
-                }
-              : {
-                  loader: 'postcss-loader',
-                  options: {
-                    plugins: [
-                      autoprefixer({
-                        browsers: ['last 2 version']
-                      })
-                    ]
-                  }
-                }
+            'css-loader'
           ]
         },
         {
@@ -55,4 +39,26 @@ exports.styles = env => {
       })
     ]
   };
+
+  if (env === PROD_ENV) {
+    config.module.rules[0].use.push({
+      loader: 'postcss-loader',
+      options: {
+        plugins: [
+          autoprefixer({
+            browsers: ['last 2 version']
+          })
+        ]
+      }
+    });
+    config.plugins.push(
+      new PurgecssPlugin({
+        paths: glob.sync(`${path.join(__dirname, '../src')}/**/*`, {
+          nodir: true
+        })
+      })
+    );
+  }
+
+  return config;
 };
