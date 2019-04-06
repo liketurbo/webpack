@@ -1,10 +1,9 @@
 const path = require('path');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
-const commonConfig = {
+const { SRC } = require('./webpack.constants');
+
+const common = {
   /**
    * Stop on the first error
    */
@@ -15,7 +14,7 @@ const commonConfig = {
    * it resolves to that.
    */
   entry: {
-    app: path.join(__dirname, '../src')
+    app: `${SRC}/index.js`
   },
   output: {
     path: path.join(__dirname, '../dist'),
@@ -23,15 +22,9 @@ const commonConfig = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../src/index.html')
-    }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'async'
-    }),
-    new FaviconsWebpackPlugin(
-      path.join(__dirname, '../src/assets/imgs/icon-4017417_640.png')
-    )
+      template: `${SRC}/index.html`
+    })
   ]
 };
 
-module.exports = commonConfig;
+module.exports = common;

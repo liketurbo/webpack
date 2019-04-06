@@ -4,20 +4,8 @@ const merge = require('webpack-merge');
 const parts = require('./webpack.parts');
 const { DEV_ENV } = require('./webpack.constants');
 
-const developmentConfig = merge(parts.styles(DEV_ENV), {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        options: {
-          emitWarning: true
-        }
-      }
-    ]
-  },
+const development = merge(parts.styles(DEV_ENV), parts.scripts(DEV_ENV), {
   plugins: [new CaseSensitivePathsPlugin(), new FriendlyErrorsWebpackPlugin()]
 });
 
-module.exports = developmentConfig;
+module.exports = development;
