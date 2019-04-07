@@ -3,7 +3,16 @@ const { DEV_ENV } = require('../webpack.constants');
 const scripts = env => {
   const config = {
     module: {
-      rules: []
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            cacheDirectory: true,
+            presets: ['@babel/env']
+          }
+        }
+      ]
     }
   };
 
