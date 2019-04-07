@@ -2,7 +2,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob');
 const autoprefixer = require('autoprefixer');
-const { DEV_ENV, PROD_ENV, SRC } = require('../webpack.constants');
+const {
+  DEV_ENV,
+  PROD_ENV,
+  SRC,
+  DEPENDENCIES
+} = require('../webpack.constants');
 
 const styles = env => {
   const config = {
@@ -10,9 +15,6 @@ const styles = env => {
       rules: [
         {
           test: /\.css$/,
-          /**
-           * modules: true - ensure that each class globally unique
-           */
           use: [
             env === DEV_ENV ? 'style-loader' : MiniCssExtractPlugin.loader,
             'css-loader'
@@ -39,6 +41,9 @@ const styles = env => {
     ]
   };
 
+  /**
+   * Additional production config
+   */
   if (env === PROD_ENV) {
     config.module.rules[0].use.push({
       loader: 'postcss-loader',
@@ -57,6 +62,25 @@ const styles = env => {
         })
       })
     );
+  }
+
+  /**
+   * Additional development config
+   */
+  if (env === DEV_ENV) {
+    config.module.rules.push({
+      test: /\.css$/,
+      enforce: 'pre',
+      loader: 'postcss-loader',
+      options: {
+        plugins: () => [
+          require('stylelint')({
+            // Ignore node_modules CSS
+            ignoreFiles: `${DEPENDENCIES[0]}/**/*.css`
+          })
+        ]
+      }
+    });
   }
 
   return config;
