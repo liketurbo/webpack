@@ -1,4 +1,4 @@
-const path = require('path');
+const { HOST, PORT, DEPENDENCIES } = require('./webpack.constants');
 
 const devServer = {
   /**
@@ -19,8 +19,8 @@ const devServer = {
    * 0.0.0.0 is available to all network devices
    * unlike default `localhost`.
    */
-  host: process.env.HOST, // Defaults to `localhost`
-  port: process.env.PORT, // Defaults to 8080
+  host: HOST,
+  port: PORT,
   watchOptions: {
     /**
      * Delay the rebuild after the first change
@@ -30,7 +30,7 @@ const devServer = {
      * Poll using interval (in ms, accepts boolean too)
      */
     poll: 1000,
-    ignored: [path.join(__dirname, 'node_modules')]
+    ignored: DEPENDENCIES
   }
 };
 

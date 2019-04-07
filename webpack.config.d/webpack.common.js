@@ -1,7 +1,6 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { SRC } = require('./webpack.constants');
+const { SRC, DIST } = require('./webpack.constants');
 
 const common = {
   /**
@@ -17,7 +16,7 @@ const common = {
     app: `${SRC}/index.js`
   },
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: DIST,
     filename: '[name].js'
   },
   plugins: [
