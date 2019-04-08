@@ -6,7 +6,13 @@ const images = () => {
           test: /\.(jpg|png|svg)$/,
           loader: 'url-loader',
           options: {
-            limit: 25000
+            limit: 15000,
+            fallback: {
+              loader: 'file-loader',
+              options: {
+                name: '[hash]'
+              }
+            }
           }
         }
       ]
