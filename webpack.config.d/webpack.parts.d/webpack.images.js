@@ -1,4 +1,6 @@
-const images = () => {
+const { DEV_ENV } = require('../webpack.constants');
+
+const images = env => {
   const config = {
     module: {
       rules: [
@@ -10,9 +12,13 @@ const images = () => {
               options: {
                 limit: 10000,
                 fallback: {
-                  loader: 'file-loader',
+                  loader: 'responsive-loader',
                   options: {
-                    name: '[hash]'
+                    name: env === DEV_ENV ? '[name]-[width]' : '[hash]',
+                    adapter: require('responsive-loader/sharp'),
+                    sizes: [320, 600, 960, 1280, 1920],
+                    placeholder: true,
+                    placeholderSize: 50
                   }
                 }
               }
