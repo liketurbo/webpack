@@ -3,17 +3,45 @@ const images = () => {
     module: {
       rules: [
         {
-          test: /\.(jpg|png|svg)$/,
-          loader: 'url-loader',
-          options: {
-            limit: 15000,
-            fallback: {
-              loader: 'file-loader',
+          test: /\.(gif|png|jpe?g|svg)$/,
+          use: [
+            {
+              loader: 'url-loader',
               options: {
-                name: '[hash]'
+                limit: 10000,
+                fallback: {
+                  loader: 'file-loader',
+                  options: {
+                    name: '[hash]'
+                  }
+                }
+              }
+            },
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                mozjpeg: {
+                  progressive: true,
+                  quality: 65
+                },
+                // optipng.enabled: false will disable optipng
+                optipng: {
+                  enabled: false
+                },
+                pngquant: {
+                  quality: '65-90',
+                  speed: 4
+                },
+                gifsicle: {
+                  interlaced: false
+                },
+                // the webp option will enable WEBP
+                webp: {
+                  quality: 75
+                }
               }
             }
-          }
+          ]
         }
       ]
     }
