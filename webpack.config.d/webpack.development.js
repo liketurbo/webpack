@@ -8,6 +8,7 @@ const development = merge(
   parts.styles(DEV_ENV),
   parts.scripts(DEV_ENV),
   parts.images(DEV_ENV),
+  parts.fonts(DEV_ENV),
   {
     plugins: [new CaseSensitivePathsPlugin(), new FriendlyErrorsWebpackPlugin()]
   }

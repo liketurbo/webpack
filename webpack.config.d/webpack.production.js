@@ -10,6 +10,7 @@ const production = merge(
   parts.styles(PROD_ENV),
   parts.scripts(PROD_ENV),
   parts.images(PROD_ENV),
+  parts.fonts(PROD_ENV),
   {
     plugins: [
       new ScriptExtHtmlWebpackPlugin({
