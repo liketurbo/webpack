@@ -14,7 +14,10 @@ const images = env => {
                 fallback: {
                   loader: 'responsive-loader',
                   options: {
-                    name: env === DEV_ENV ? '[name]-[width]' : '[hash]',
+                    name:
+                      env === DEV_ENV
+                        ? '[name]-[width]'
+                        : 'images/[hash].[ext]',
                     adapter: require('responsive-loader/sharp'),
                     sizes: [320, 600, 960, 1280, 1920],
                     placeholder: true,

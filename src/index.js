@@ -5,10 +5,10 @@ import './assets/styles/index.styl';
 import createDiv from './components/create-div';
 import createImage from './components/create-image';
 
-import rose from './assets/imgs/rose.jpg';
-import kitty from './assets/imgs/kitty.jpg';
-import murray from './assets/imgs/murray.jpg';
-import sausage from './assets/imgs/sausage.jpg';
+import rose from './assets/images/rose.jpg';
+import kitty from './assets/images/kitty.jpg';
+import murray from './assets/images/murray.jpg';
+import sausage from './assets/images/sausage.jpg';
 
 document.body.appendChild(createDiv('div'));
 document.body.appendChild(createImage(rose.src, rose.srcSet));

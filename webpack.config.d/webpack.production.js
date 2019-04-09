@@ -15,7 +15,10 @@ const production = merge(
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
       }),
-      new FaviconsWebpackPlugin(`${SRC}/assets/imgs/icon.png`)
+      new FaviconsWebpackPlugin({
+        logo: `${SRC}/assets/images/icon.png`,
+        prefix: 'icons/'
+      })
     ]
   }
 );
