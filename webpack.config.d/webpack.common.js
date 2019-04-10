@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const { SRC, DIST } = require('./webpack.constants');
 
 const common = {

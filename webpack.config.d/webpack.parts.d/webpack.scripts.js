@@ -8,8 +8,7 @@ const scripts = env => {
           test: /\.js$/,
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
-            presets: ['@babel/env']
+            cacheDirectory: true
           }
         }
       ]
