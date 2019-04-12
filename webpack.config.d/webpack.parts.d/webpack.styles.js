@@ -17,7 +17,7 @@ const styles = env => {
           test: /\.css$/,
           use: [
             env === DEV_ENV ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader'
+            env === DEV_ENV ? 'css-loader?sourceMap' : 'css-loader'
           ]
         },
         {
