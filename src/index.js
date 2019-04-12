@@ -10,7 +10,7 @@ import kitty from './assets/images/kitty.jpg';
 import murray from './assets/images/murray.jpg';
 import sausage from './assets/images/sausage.jpg';
 
-document.body.appendChild(createDiv('div'));
+document.body.appendChild(createDiv());
 document.body.appendChild(createImage(rose.src, rose.srcSet));
 document.body.appendChild(createImage(kitty.src, kitty.srcSet));
 document.body.appendChild(createImage(murray.src, murray.srcSet));

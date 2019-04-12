@@ -5,6 +5,9 @@ const parts = require('./webpack.parts');
 const { DEV_ENV } = require('./webpack.constants');
 
 const development = merge(
+  {
+    devtool: 'inline-source-map'
+  },
   parts.styles(DEV_ENV),
   parts.scripts(DEV_ENV),
   parts.images(DEV_ENV),
