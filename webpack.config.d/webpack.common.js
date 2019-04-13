@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const packageFile = require('../package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { SRC, DIST } = require('./webpack.constants');
 
@@ -37,11 +36,8 @@ const common = {
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/
             )[1];
 
-            const isDependency = Object.keys(packageFile.dependencies).includes(
-              packageName
-            );
             // npm package names are URL-safe, but some servers don't like @ symbols
-            if (isDependency) return `npm.${packageName.replace('@', '')}`;
+            return `npm.${packageName.replace('@', '')}`;
           }
         }
       }
