@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+const packageFile = require('../package.json');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { SRC, DIST } = require('./webpack.constants');
 
@@ -12,16 +14,44 @@ const common = {
    * it resolves to that.
    */
   entry: {
-    app: `${SRC}/index.js`
+    app: `${SRC}/index.js`,
+    lib: ['react', 'react-dom']
   },
   output: {
-    path: DIST,
-    filename: '[name].js'
+    filename: '[name].[contenthash].js',
+    path: DIST
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // get the name. E.g. node_modules/packageName/not/this/part.js
+            // or node_modules/packageName
+            const packageName = module.context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1];
+
+            const isDependency = Object.keys(packageFile.dependencies).includes(
+              packageName
+            );
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            if (isDependency) return `npm.${packageName.replace('@', '')}`;
+          }
+        }
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: `${SRC}/index.html`
-    })
+    }),
+    new webpack.HashedModuleIdsPlugin() // so that file hashes don't change unexpectedly
   ]
 };
 

@@ -1,3 +1,5 @@
+import 'react';
+import 'react-dom';
 import './assets/styles/index.css';
 import './assets/styles/index.less';
 import './assets/styles/index.sass';

@@ -16,7 +16,7 @@ const scripts = env => {
     },
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
-      extensions: ['.ts', '.js']
+      extensions: ['.tsx', '.jsx', '.ts', '.js']
     }
   };
 
