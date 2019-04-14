@@ -10,6 +10,7 @@ const createDiv = text => {
         element.classList.add('lazy');
       })
       .catch(err => {
+        // eslint-disable-next-line
         console.error(err);
       });
   };

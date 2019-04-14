@@ -1,5 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Loadable from 'react-loadable';
 
-const App = () => <div>Hello from react</div>;
+import Loading from './Loading';
 
-export default App;
+const LoadableComponent = Loadable({
+  loader: async () => {
+    await new Promise(res => {
+      setTimeout(() => res(), 5000);
+    });
+
+    return import('./Async');
+  },
+  loading: Loading
+});
+
+export default class App extends Component {
+  render() {
+    return <LoadableComponent />;
+  }
+}
