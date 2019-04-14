@@ -5,7 +5,7 @@ const scripts = env => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           loader: 'babel-loader',
           options: {
             cacheDirectory: true

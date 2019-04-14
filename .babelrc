@@ -1,14 +1,4 @@
 {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "modules": false,
-        "targets": {
-          "browsers": ["last 2 Chrome versions"]
-        }
-      }
-    ]
-  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }
