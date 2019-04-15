@@ -1,8 +1,10 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const GitRevisionPlugin = require('git-revision-webpack-plugin');
 
 const parts = require('./webpack.parts');
 const { PROD_ENV, SRC } = require('./webpack.constants');
@@ -21,7 +23,10 @@ const production = merge(
         logo: `${SRC}/assets/images/icon.png`,
         prefix: 'icons/'
       }),
-      new CleanWebpackPlugin()
+      new CleanWebpackPlugin(),
+      new webpack.BannerPlugin({
+        banner: new GitRevisionPlugin().version()
+      })
     ]
   }
 );
