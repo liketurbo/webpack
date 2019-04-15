@@ -15,6 +15,11 @@ const production = merge(
   parts.images(PROD_ENV),
   parts.fonts(PROD_ENV),
   {
+    performance: {
+      hints: 'warning', // 'error' or false are valid too
+      maxEntrypointSize: 100000, // in bytes
+      maxAssetSize: 450000 // in bytes
+    },
     plugins: [
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'async'
