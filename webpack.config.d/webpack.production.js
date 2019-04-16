@@ -1,11 +1,9 @@
-const webpack = require('webpack');
 const merge = require('webpack-merge');
-
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const parts = require('./webpack.parts');
 const { PROD_ENV, SRC, DIST } = require('./webpack.constants');
@@ -27,6 +25,11 @@ const production = merge(
             output: {
               comments: false
             }
+          }
+        }),
+        new OptimizeCSSAssetsPlugin({
+          cssProcessorPluginOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }]
           }
         })
       ],
@@ -70,10 +73,7 @@ const production = merge(
         logo: `${SRC}/assets/images/icon.png`,
         prefix: 'icons/'
       }),
-      new CleanWebpackPlugin(),
-      new webpack.BannerPlugin({
-        banner: new GitRevisionPlugin().version()
-      })
+      new CleanWebpackPlugin()
     ]
   }
 );
