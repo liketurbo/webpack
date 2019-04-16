@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { SRC, DIST } = require('./webpack.constants');
+const { SRC } = require('./webpack.constants');
 
 const common = {
   /**
@@ -13,10 +13,6 @@ const common = {
    */
   entry: {
     app: `${SRC}/index.js`
-  },
-  output: {
-    filename: '[name].[contenthash].js',
-    path: DIST
   },
   plugins: [
     new HtmlWebpackPlugin({

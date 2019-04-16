@@ -8,7 +8,7 @@ const GitRevisionPlugin = require('git-revision-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const parts = require('./webpack.parts');
-const { PROD_ENV, SRC } = require('./webpack.constants');
+const { PROD_ENV, SRC, DIST } = require('./webpack.constants');
 
 const production = merge(
   parts.styles(PROD_ENV),
@@ -16,6 +16,10 @@ const production = merge(
   parts.images(PROD_ENV),
   parts.fonts(PROD_ENV),
   {
+    output: {
+      filename: '[contenthash].js',
+      path: DIST
+    },
     optimization: {
       minimizer: [
         new UglifyJsPlugin({
@@ -37,12 +41,17 @@ const production = merge(
             name(module) {
               // get the name. E.g. node_modules/packageName/not/this/part.js
               // or node_modules/packageName
-              const packageName = module.context.match(
+              let packageName = module.context.match(
                 /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-              )[1];
+              );
 
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace('@', '')}`;
+              if (packageName) {
+                packageName = packageName[1];
+                // npm package names are URL-safe, but some servers don't like @ symbols
+                packageName = packageName.replace('@', '');
+              }
+
+              return packageName;
             }
           }
         }
@@ -64,8 +73,7 @@ const production = merge(
       new CleanWebpackPlugin(),
       new webpack.BannerPlugin({
         banner: new GitRevisionPlugin().version()
-      }),
-      new webpack.HashedModuleIdsPlugin() // so that file hashes don't change unexpectedly
+      })
     ]
   }
 );
