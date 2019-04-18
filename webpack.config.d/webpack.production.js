@@ -15,7 +15,7 @@ const production = merge(
   parts.fonts(PROD_ENV),
   {
     output: {
-      filename: '[contenthash].js',
+      filename: '[name].[contenthash].js',
       path: DIST
     },
     optimization: {

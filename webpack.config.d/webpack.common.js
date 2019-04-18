@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { SRC } = require('./webpack.constants');
+const { SRC, PROD_ENV } = require('./webpack.constants');
 
-const common = {
+const common = env => ({
   /**
    * Stop on the first error
    */
@@ -16,9 +16,20 @@ const common = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: `${SRC}/index.html`
+      template: `${SRC}/index.html`,
+      minify:
+        env === PROD_ENV
+          ? {
+              collapseWhitespace: true,
+              removeComments: true,
+              removeRedundantAttributes: true,
+              removeScriptTypeAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              useShortDoctype: true
+            }
+          : false
     })
   ]
-};
+});
 
 module.exports = common;
