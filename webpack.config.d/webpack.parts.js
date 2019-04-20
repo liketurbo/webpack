@@ -6,4 +6,4 @@ const fonts = require('./webpack.parts.d/webpack.fonts');
 exports.styles = env => styles(env);
 exports.scripts = env => scripts(env);
 exports.images = env => images(env);
-exports.fonts = env => fonts(env);
+exports.fonts = () => fonts;
