@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import Loadable from 'react-loadable';
+import React, { lazy, Suspense, useState } from 'react';
 
-import Loading from './Loading';
+const Lazy = lazy(() => import('./Async'));
 
-const LoadableComponent = Loadable({
-  loader: async () => {
-    await new Promise(res => {
-      setTimeout(() => res(), 5000);
-    });
+const App = () => {
+  const [load, setLoad] = useState(false);
+  return (
+    <div>
+      Hello it's React, glad to meet you.
+      <button onClick={() => setLoad(true)}>load other content</button>
+      {load && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Lazy />
+        </Suspense>
+      )}
+    </div>
+  );
+};
 
-    return import('./Async');
-  },
-  loading: Loading
-});
-
-export default class App extends Component {
-  render() {
-    return <LoadableComponent />;
-  }
-}
+export default App;
