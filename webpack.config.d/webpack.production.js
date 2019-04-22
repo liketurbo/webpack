@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
@@ -68,6 +69,8 @@ const production = merge(
         logo: `${SRC}/assets/images/icon.png`,
         prefix: 'icons/'
       }),
+
+      new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
       new CleanWebpackPlugin()
     ]
   }
