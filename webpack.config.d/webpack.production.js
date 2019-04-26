@@ -5,6 +5,7 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 const parts = require('./webpack.parts');
 const { PROD_ENV, SRC, DIST } = require('./webpack.constants');
@@ -69,9 +70,12 @@ const production = merge(
         logo: `${SRC}/assets/images/icon.png`,
         prefix: 'icons/'
       }),
-
       new webpack.HashedModuleIdsPlugin(), // so that file hashes don't change unexpectedly
-      new CleanWebpackPlugin()
+      new CleanWebpackPlugin(),
+      new CompressionPlugin({
+        test: /\.js(\?.*)?$/i,
+        cache: true
+      })
     ]
   }
 );
