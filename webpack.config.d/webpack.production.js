@@ -1,10 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 const parts = require('./webpack.parts');
@@ -21,20 +18,6 @@ const production = merge(
       path: DIST
     },
     optimization: {
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            output: {
-              comments: false
-            }
-          }
-        }),
-        new OptimizeCSSAssetsPlugin({
-          cssProcessorPluginOptions: {
-            preset: ['default', { discardComments: { removeAll: true } }]
-          }
-        })
-      ],
       runtimeChunk: 'single',
       splitChunks: {
         chunks: 'all',
@@ -63,9 +46,6 @@ const production = merge(
       maxAssetSize: 450000 // in bytes
     },
     plugins: [
-      new ScriptExtHtmlWebpackPlugin({
-        defaultAttribute: 'async'
-      }),
       new FaviconsWebpackPlugin({
         logo: `${SRC}/assets/images/icon.png`,
         prefix: 'icons/'

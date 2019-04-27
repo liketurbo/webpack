@@ -1,4 +1,6 @@
 const { DEV_ENV } = require('../webpack.constants');
+const TerserPlugin = require('terser-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const scripts = env => {
   const config = {
@@ -17,7 +19,29 @@ const scripts = env => {
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
       extensions: ['.tsx', '.jsx', '.ts', '.js']
-    }
+    },
+    optimization:
+      env === DEV_ENV
+        ? {}
+        : {
+            minimizer: [
+              new TerserPlugin({
+                terserOptions: {
+                  output: {
+                    comments: false
+                  }
+                }
+              })
+            ]
+          },
+    plugins:
+      env === DEV_ENV
+        ? []
+        : [
+            new ScriptExtHtmlWebpackPlugin({
+              defaultAttribute: 'async'
+            })
+          ]
   };
 
   if (env === DEV_ENV) {

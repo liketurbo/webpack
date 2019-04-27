@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const glob = require('glob');
 const autoprefixer = require('autoprefixer');
 const {
@@ -34,6 +35,18 @@ const styles = env => {
         }
       ]
     },
+    optimization:
+      env === DEV_ENV
+        ? {}
+        : {
+            minimizer: [
+              new OptimizeCSSAssetsPlugin({
+                cssProcessorPluginOptions: {
+                  preset: ['default', { discardComments: { removeAll: true } }]
+                }
+              })
+            ]
+          },
     plugins: [
       new MiniCssExtractPlugin({
         filename: '[name].css'

@@ -4520,11 +4520,6 @@ html-tags@^2.0.0:
   resolved "https://registry.npmjs.org/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
   integrity sha1-ELMKOGCF9Dzt41PMj6fLDe7qZos=
 
-html-webpack-change-assets-extension-plugin@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/html-webpack-change-assets-extension-plugin/-/html-webpack-change-assets-extension-plugin-1.2.0.tgz#db4e6ce0d17e9ab11783b98e2ad2e6c3ae70dcbf"
-  integrity sha512-Dav8tcC0YQbSxhzspfZ+HmZEEpPf9LPX8vmTrm5W1UWlaQkHKUK890S9MmwA14krcUrAt2kkqyqJxIKAQr5mDA==
-
 html-webpack-plugin@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/html-webpack-plugin/-/html-webpack-plugin-3.2.0.tgz#b01abbd723acaaa7b37b6af4492ebda03d9dd37b"
