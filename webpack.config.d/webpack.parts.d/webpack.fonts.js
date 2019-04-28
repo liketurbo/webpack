@@ -1,3 +1,5 @@
+const kebabCase = require('lodash/kebabCase');
+
 const fonts = {
   module: {
     rules: [
@@ -7,7 +9,10 @@ const fonts = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]'
+            name(file) {
+              const [, name, ext] = /([-\w]+)\.(\w+)/.exec(file);
+              return `${kebabCase(name)}.${ext}`;
+            }
           }
         }
       }
