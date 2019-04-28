@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const { SRC, PROD_ENV } = require('./webpack.constants');
 
 const common = env => ({
@@ -28,7 +29,8 @@ const common = env => ({
               useShortDoctype: true
             }
           : false
-    })
+    }),
+    new DynamicCdnWebpackPlugin()
   ]
 });
 

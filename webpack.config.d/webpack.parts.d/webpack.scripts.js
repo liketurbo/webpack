@@ -1,6 +1,5 @@
 const { DEV_ENV } = require('../webpack.constants');
 const TerserPlugin = require('terser-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 
 const scripts = env => {
   const config = {
@@ -33,15 +32,7 @@ const scripts = env => {
                 }
               })
             ]
-          },
-    plugins:
-      env === DEV_ENV
-        ? []
-        : [
-            new ScriptExtHtmlWebpackPlugin({
-              defaultAttribute: 'async'
-            })
-          ]
+          }
   };
 
   if (env === DEV_ENV) {
