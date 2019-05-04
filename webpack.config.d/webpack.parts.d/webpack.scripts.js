@@ -1,5 +1,6 @@
 const { DEV_ENV } = require('../webpack.constants');
 const TerserPlugin = require('terser-webpack-plugin');
+const HappyPack = require('happypack');
 
 const scripts = env => {
   const config = {
@@ -7,10 +8,7 @@ const scripts = env => {
       rules: [
         {
           test: /\.jsx?$/,
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true
-          }
+          loader: 'happypack/loader'
         },
         { test: /\.tsx?$/, loader: 'ts-loader' }
       ]
@@ -32,7 +30,12 @@ const scripts = env => {
                 }
               })
             ]
-          }
+          },
+    plugins: [
+      new HappyPack({
+        loaders: ['babel-loader']
+      })
+    ]
   };
 
   if (env === DEV_ENV) {
