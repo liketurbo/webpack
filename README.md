@@ -39,3 +39,10 @@ Playing with webpack.
   HtmlWebpackPlugin with a HtmlPlugin that does far less is one direction.
 - Consider using parallel variants of plugins if they are available. webpack-uglify-parallel is one
   example.
+
+## Targets
+
+- Web
+- Webworker
+- Node
+- Desktop
