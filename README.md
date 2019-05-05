@@ -9,6 +9,168 @@ Playing with webpack.
 - [Critical-path css tools](https://github.com/addyosmani/critical-path-css-tools)
 - [The 100% correct way to split your chunks with Webpack](https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758)
 
+## Loader Definitions
+
+```
+module.exports = {
+...
+  module: {
+    rules: [
+      {
+        // **Conditions**
+        // Match files against RegExp or a function.
+        test: /\.js$/,
+        // **Restrictions**
+        // Restrict matching to a directory. This
+        // also accepts an array of paths or a function.
+        // The same applies to `exclude`.
+        include: path.join(__dirname, 'app'),
+        exclude(path) {
+        // You can perform more complicated checks
+        // through functions if you want.
+        return path.match(/node_modules/);
+        },
+        // **Actions**
+        // Apply loaders the matched files.
+        use: 'babel-loader',
+      },
+    ],
+  },
+};
+```
+
+> It’s good to keep in mind that _webpack’s_ loaders are always evaluated from **right to left** and from **bottom to top** (separate definitions).
+
+### Enforcing
+
+```
+{
+  // Conditions
+  test: /\.js$/,
+  enforce: 'pre', // 'post' too
+  // Actions
+  loader: 'eslint-loader',
+},
+```
+
+### Passing Parameters to a Loader
+
+```
+{
+  // Conditions
+  test: /\.js$/,
+  include: PATHS.app,
+  // Actions
+  use: 'babel-loader?cacheDirectory,presets[]=es2015',
+},
+```
+
+### Different options
+
+```
+{
+  // Conditions
+  test: /\.js$/,
+  include: PATHS.app,
+  // Actions
+  loader: 'babel-loader',
+  options: {
+    cacheDirectory: true,
+    presets: ['react', 'es2015'],
+  },
+},
+```
+
+```
+{
+  // Conditions
+  test: /\.js$/,
+  include: PATHS.app,
+  // Actions
+  use: {
+    loader: 'babel-loader',
+    options: {
+      cacheDirectory: true,
+      presets: ['react', 'es2015'],
+    },
+  },
+},
+```
+
+```
+{
+  test: /\.js$/,
+  include: PATHS.app,
+  use: [
+    {
+      loader: 'babel-loader',
+      options: {
+        cacheDirectory: true,
+        presets: ['react', 'es2015'],
+      },
+    },
+    // Add more loaders here
+  ],
+},
+```
+
+```
+{
+  test: /\.css$/,
+  // resource refers to the resource path matched.
+  // resourceQuery contains possible query passed to it (?sourceMap)
+  // issuer tells about match context path
+  use: ({ resource, resourceQuery, issuer }) => {
+    // You have to return either something falsy,
+    // string (i.e., 'style-loader'), or an object from here.
+    //
+    // Returning an array fails! To get around that,
+    // it's possible to nest rules.
+    if (env === 'development') {
+      return {
+        // Trigger css-loader first
+        loader: 'css-loader',
+        rules: [
+          // And style-loader after it
+          'style-loader',
+        ],
+      };
+    }
+  ...
+  },
+},
+```
+
+### Inline Definitions
+
+```
+// Process foo.png through url-loader and other
+// possible matches.
+import 'url-loader!./foo.png';
+// Override possible higher level match completely
+import '!!url-loader!./bar.png';
+```
+
+## Source maps
+
+```
+module.exports = {
+...
+  devtool: 'source-map'
+};
+```
+
+### Types
+
+- source-map _(separate, quality)_
+- cheap-source-map _(separate, performance)_
+- cheap-module-source-map _(separate, performance)_
+- hidden-source-map _(?)_
+- eval _(include in path, quality)_
+- cheap-eval-source-map _(include in base64, performance)_
+- cheap-module-eval-source-map _(include in base64, performance)_
+- eval-source-map _(include in base64, quality)_
+
 ## Optimization
 
 ### Low-Level Optimizations

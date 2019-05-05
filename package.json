@@ -1,11 +1,10 @@
 {
   "name": "webpack",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "repository": "git@github.com:liketurbo/webpack.git",
   "author": "Ramzan Chasygov <theliketurbo@gmail.com>",
   "license": "MIT",
-  "private": true,
   "workspaces": [
     "packages/*"
   ]

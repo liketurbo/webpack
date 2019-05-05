@@ -1,6 +1,7 @@
 {
   "name": "@webpack/web",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "start": "nodemon --ignore src --exec yarn dev",
     "dev": "webpack-dev-server --mode=development",
