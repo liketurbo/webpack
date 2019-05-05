@@ -18,6 +18,11 @@ const config = {
       {
         test: /\.js?$/,
         loader: 'happypack/loader'
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'eslint-loader'
       }
     ]
   },
