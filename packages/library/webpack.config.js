@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const HappyPack = require('happypack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
   entry: {
-    lib: path.join(__dirname, 'src', 'random-string.js')
+    lib: path.join(__dirname, 'src', 'random-string.ts')
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -16,22 +16,17 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js?$/,
-        loader: 'happypack/loader'
+        test: /\.ts?$/,
+        loader: 'ts-loader'
       },
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.ts$/,
         loader: 'eslint-loader'
       }
     ]
   },
-  plugins: [
-    new HappyPack({
-      loaders: ['babel-loader']
-    }),
-    new CleanWebpackPlugin()
-  ]
+  plugins: [new CleanWebpackPlugin()]
 };
 
 module.exports = config;

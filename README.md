@@ -208,3 +208,9 @@ module.exports = {
 - Webworker
 - Node
 - Desktop
+
+## Typescript `eslint`
+
+- `eslint`: The core ESLint linting library
+- `@typescript-eslint/parser`: The parser that will allow ESLint to lint TypeScript code
+- `@typescript-eslint/eslint-plugin`: A plugin that contains a bunch of ESLint rules that are TypeScript specific
