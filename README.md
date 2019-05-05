@@ -209,6 +209,15 @@ module.exports = {
 - Node
 - Desktop
 
+## Environments
+
+- _commonjs_ `exports.demo = ...`
+- _commonjs2_ `module.exports = ...`
+- _AMD_ `define("demo", [], function() { return (function(modules) { ... }`
+- _UMD_ `if (exports) { ... } else if (module) { ... } else if (define) { ... }`
+- _JSONP_ `demo(function(modules) { ... })`
+- _SystemJS_ `?`
+
 ## Typescript `eslint`
 
 - `eslint`: The core ESLint linting library
