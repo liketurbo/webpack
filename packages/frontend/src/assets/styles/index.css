@@ -1,0 +1,20 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
+@font-face {
+  font-family: Dokdo;
+  src: url('../fonts/Dokdo-Regular.ttf');
+}
+
+.used {
+  display: flex;
+  color: brown;
+  background-color: powderblue;
+  font-family: 'Dokdo';
+  background-image: url('../images/sky.jpg');
+}
+
+.unused {
+  color: red;
+  background-color: azure;
+  font-family: fantasy;
+}
