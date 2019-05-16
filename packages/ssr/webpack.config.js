@@ -3,12 +3,11 @@ const path = require('path');
 
 const config = {
   entry: {
-    app: path.join(__dirname, 'src', 'ssr.tsx')
+    index: path.join(__dirname, 'src', 'ssr.tsx')
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[contenthash].js',
-    libraryTarget: 'umd'
+    filename: '[name].js'
   },
   module: {
     rules: [

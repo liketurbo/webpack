@@ -1,11 +1,11 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 
-const SSR = <div onClick={() => alert('hello')}>Hello world</div>;
+const SSR = () => <div onClick={() => alert('hello')}>Hello world</div>;
 
 // Render only in the browser, export otherwise
 if (typeof document === 'undefined') {
   module.exports = SSR;
 } else {
-  render(SSR, document.getElementById('app'));
+  ReactDOM.render(<SSR />, document.getElementById('root'));
 }
